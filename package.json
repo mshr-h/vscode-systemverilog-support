@@ -1,0 +1,29 @@
+{
+	"name": "SystemVerilog",
+	"description": "System Verilog support for VS Code",
+	"version": "0.0.1",
+	"publisher": "mshr-h",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mshr-h/vscode-systemverilog-support.git"
+	},
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Languages"
+	],
+	"contributes": {
+		"languages": [{
+			"id": "systemverilog",
+			"aliases": ["System Verilog", "systemverilog"],
+			"extensions": [".sv",".SV"],
+			"configuration": "./systemverilog.configuration.json"
+		}],
+		"grammars": [{
+			"language": "systemverilog",
+			"scopeName": "source.systemverilog",
+			"path": "./syntaxes/systemverilog.tmLanguage"
+		}]
+	}
+}
