@@ -1,4 +1,4 @@
-# SystemVerilog support for VSCode
+# SystemVerilog support for VSCode [![Build Status](https://travis-ci.org/mshr-h/vscode-systemverilog-support.svg?branch=master)](https://travis-ci.org/mshr-h/vscode-systemverilog-support)
 SystemVerilog support based on [https://github.com/al8/sublimetext-Verilog](https://github.com/al8/sublimetext-Verilog) SumblieText package.
 
 ## Features
