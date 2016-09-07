@@ -159,7 +159,13 @@
 				<string>(&amp;|\||\^|~|{|}|&lt;&lt;|&gt;&gt;|\?|:)</string>
 				<key>name</key>
 				<string>keyword.operator.bitwise.systemverilog</string>
-			</dict>				
+			</dict>	
+			<dict>
+				<key>match</key>
+				<string>'\s*\(.+\)</string>
+				<key>name</key>
+				<string>keyword.operator.staticcasting.systemverilog</string>
+			</dict>	
 			<dict>
 				<key>match</key>
 				<string>\b(output|input|inout|and|nand|nor|or|xor|xnor|buf|not|bufif[01]|notif[01]|r?[npc]mos|tran|r?tranif[01]|pullup|pulldown)\b</string>
