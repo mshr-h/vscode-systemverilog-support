@@ -9,6 +9,19 @@
 	"brackets": [
 		["{", "}"],
 		["[", "]"],
-		["(", ")"]
+		["(", ")"],
+		["case", "endcase"],
+		["class", "endclass"],
+		["clocking", "endclocking"],
+		["function", "endfunction"],
+		["group", "endgroup"],
+		["interface", "endinterface"],
+		["module", "endmodule"],
+		["package", "endpackage"],
+		["primitive", "endprimitive"],
+		["program", "endprogram"],
+		["property", "endproperty"],
+		["sequence", "endsequence"],
+		["task", "endtask"]
 	]
 }
