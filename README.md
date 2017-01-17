@@ -5,8 +5,8 @@ SystemVerilog support based on [https://github.com/al8/sublimetext-Verilog](http
 ### Done
 - Syntax highlighting for `.sv` `.SV` files
 
-### In progress
-- Simple Snippets
+### Known bug
+- `begin ... end` matching not supported
 
 ## GitHub repos
 [mshr-h/vscode-systemverilog-support](https://github.com/mshr-h/vscode-systemverilog-support)
