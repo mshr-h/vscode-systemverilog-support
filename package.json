@@ -24,6 +24,10 @@
 			"language": "systemverilog",
 			"scopeName": "source.systemverilog",
 			"path": "./syntaxes/systemverilog.tmLanguage"
+		}],
+		"snippets": [{
+			"language": "systemverilog",
+			"path": "./snippets/snippets.json"
 		}]
 	}
 }
