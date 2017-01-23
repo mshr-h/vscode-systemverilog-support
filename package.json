@@ -18,7 +18,7 @@
 			"id": "systemverilog",
 			"aliases": ["System Verilog", "systemverilog"],
 			"extensions": [".sv",".SV"],
-			"configuration": "./systemverilog.configuration.json"
+			"configuration": "./language-configuration.json"
 		}],
 		"grammars": [{
 			"language": "systemverilog",

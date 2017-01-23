@@ -4,9 +4,17 @@ SystemVerilog support based on [https://github.com/al8/sublimetext-Verilog](http
 ## Features
 ### Done
 - Syntax highlighting for `.sv` `.SV` files
+- Snippets for:
+    - **Blocks:** `always_ff`, `always_comb`, `module`, `initial`, `function`
+    - **Conditional blocks:** `if`, `while`, `for`
+    - **Declaration:** `parameter`, `function`
+    - **Pre-build:** `include`, `define`
+    - **Special:**
+        - `paramod` for module with parameters
+        - `begin` to generate begin and end pair
 
 ### Known bug
-- `begin ... end` matching not supported
+- `begin ... end` bracket matching not supported
 
 ## GitHub repos
 [mshr-h/vscode-systemverilog-support](https://github.com/mshr-h/vscode-systemverilog-support)

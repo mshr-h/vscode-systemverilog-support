@@ -72,7 +72,7 @@
 	},
 
 	"parameter": {
-		"prefix": "param",
+		"prefix": "parameter",
 		"body": [
 			"parameter $1 = $2;"
 		],
@@ -112,7 +112,7 @@
 	},
 
 	"function": {
-		"prefix": "func",
+		"prefix": "function",
 		"body": [
 			"function $1;",
 			"  $2;",
@@ -120,5 +120,23 @@
 			"endfunction"
 		],
 		"description": "function (...) ... endfunction"
+	},
+
+	"beginend block": {
+		"prefix": "begin",
+		"body": [
+			"begin",
+			"\t$0",
+			"end"
+		]
+	},
+
+	"initial": {
+		"prefix": "initial",
+		"body": [
+			"initial begin",
+			"\t$0",
+			"end"
+		]
 	}
 }
