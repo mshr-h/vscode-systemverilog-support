@@ -23,5 +23,11 @@
 		["property", "endproperty"],
 		["sequence", "endsequence"],
 		["task", "endtask"]
+	],
+
+	"autoClosingPairs": [
+		{"open":"(", "close":")", "notIn":["string", "comment"]},
+		{"open":"[", "close":"]", "notIn":["string", "comment"]},
+		{"open":"{", "close":"}", "notIn":["string", "comment"]}
 	]
 }

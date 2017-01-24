@@ -18,12 +18,16 @@
 			"id": "systemverilog",
 			"aliases": ["System Verilog", "systemverilog"],
 			"extensions": [".sv",".SV"],
-			"configuration": "./systemverilog.configuration.json"
+			"configuration": "./language-configuration.json"
 		}],
 		"grammars": [{
 			"language": "systemverilog",
 			"scopeName": "source.systemverilog",
 			"path": "./syntaxes/systemverilog.tmLanguage"
+		}],
+		"snippets": [{
+			"language": "systemverilog",
+			"path": "./snippets/snippets.json"
 		}]
 	}
 }
