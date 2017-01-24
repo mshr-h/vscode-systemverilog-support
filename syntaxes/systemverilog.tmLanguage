@@ -167,10 +167,37 @@
 				<string>keyword.operator.staticcasting.systemverilog</string>
 			</dict>
 			<dict>
-				<key>match</key>
-				<string>'\s*\{.+\}</string>
+				<key>begin</key>
+				<string>'{</string>
+				<key>beginCaptures</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>name</key>
+						<string>keyword.operator.unpackaedarrayassignment.begin.systemverilog</string>
+					</dict>
+				</dict>
+				<key>end</key>
+				<string>}</string>
+				<key>endCaptures</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>name</key>
+						<string>keyword.operator.unpackaedarrayassignment.end.systemverilog</string>
+					</dict>
+				</dict>
 				<key>name</key>
 				<string>keyword.operator.unpackedarrayassignment.systemverilog</string>
+				<key>patterns</key>
+				<array>
+					<dict>
+						<key>match</key>
+						<string>.</string>
+						<key>name</key>
+						<string>constant.character.escape.systemverilog</string>
+					</dict>
+				</array>
 			</dict>
 			<dict>
 				<key>match</key>
