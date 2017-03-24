@@ -52,7 +52,7 @@ class SystemVerilogHoverProvider implements HoverProvider {
             return;
         }
 
-        let variableType = String.raw`\b(input|output|reg|wire|logic|integer)\b\s+`;
+        let variableType = String.raw`\b(input|output|inout|reg|wire|logic|integer|bit|byte|shortint|int|longint|time|shortreal|real|double|realtime)\b\s+`;
         let variableTypeStart = '^' + variableType;
         let paraType = String.raw`^\b(parameter|localparam)\b\s+\b${target}\b`;
 
