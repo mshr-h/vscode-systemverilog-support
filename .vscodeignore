@@ -6,3 +6,7 @@ tsconfig.json
 build.sh
 testfile.*
 
+.vscode-test/**
+out/test/**
+src/**
+**/*.map
