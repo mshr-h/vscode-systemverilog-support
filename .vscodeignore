@@ -4,4 +4,9 @@ test/**
 tsconfig.json
 *.vsix
 build.sh
+testfile.*
 
+.vscode-test/**
+out/test/**
+src/**
+**/*.map
