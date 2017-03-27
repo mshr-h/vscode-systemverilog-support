@@ -8,7 +8,7 @@
 		"url": "https://github.com/mshr-h/vscode-systemverilog-support.git"
 	},
 	"engines": {
-		"vscode": "^0.10.1"
+		"vscode": "^1.10.0"
 	},
 	"categories": [
 		"Languages"
@@ -41,6 +41,7 @@
 	},
 	"devDependencies": {
 		"typescript": "^2.0.3",
-		"vscode": "^1.0.0"
+		"vscode": "^1.0.0",
+		"@types/node": "*"
 	}
 }
