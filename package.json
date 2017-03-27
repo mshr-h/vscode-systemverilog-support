@@ -28,6 +28,10 @@
 		"snippets": [{
 			"language": "systemverilog",
 			"path": "./snippets/snippets.json"
+		}],
+		"commands": [{
+			"command": "extension.systemverilog.instantiateModule",
+			"title": "System Verilog: Instantiate Module"
 		}]
 	},
 	"activationEvents": [
