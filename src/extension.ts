@@ -1,19 +1,19 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the necessary extensibility types to use in your code below
-import {ExtensionContext, Position, TextDocument, CancellationToken, languages, Hover, HoverProvider} from 'vscode';
+import * as vscode from 'vscode';
 
 // This method is called when your extension is activated. Activation is
 // controlled by the activation events defined in package.json.
-export function activate(context: ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
     // System Verilog Hover Provider
     context.subscriptions.push(
-        languages.registerHoverProvider('systemverilog',
+        vscode.languages.registerHoverProvider('systemverilog',
             new SystemVerilogHoverProvider()
         )
     );
 }
 
-class SystemVerilogHoverProvider implements HoverProvider {
+class SystemVerilogHoverProvider implements vscode.HoverProvider {
 
     private _excludedText: RegExp;
 
@@ -22,8 +22,8 @@ class SystemVerilogHoverProvider implements HoverProvider {
     }
 
     public provideHover(
-        document: TextDocument, position: Position, token: CancellationToken):
-        Hover {
+        document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
+        vscode.Hover {
             // text at current line
             let textLine = document.lineAt(position).text;
 
@@ -39,14 +39,14 @@ class SystemVerilogHoverProvider implements HoverProvider {
                 let declarationText = this._findDeclaration(document, position, targetText);
                 if (declarationText !== undefined) {
                     let renderedText = '```systemverilog\n' + declarationText + '\n```';
-                    return new Hover(renderedText);
+                    return new vscode.Hover(renderedText);
                 } else {
                     return;
                 }
             }
     }
 
-    private _findDeclaration(document: TextDocument, position: Position, target: string): string {
+    private _findDeclaration(document: vscode.TextDocument, position: vscode.Position, target: string): string {
         // check target is valid variable name
         if (target.search(/[A-Za-z_][A-Za-z0-9_]*/g) === -1) {
             return;
