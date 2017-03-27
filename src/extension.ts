@@ -61,6 +61,10 @@ class SystemVerilogHoverProvider implements vscode.HoverProvider {
         for (let i = position.line-1; i >= 0; i--) {
             // text at current line
             let element = document.lineAt(i).text.replace(/\/\/.*/, '').trim().replace(/\s+/g, ' ');
+            let lastChar = element.charAt(element.length - 1);
+            if (lastChar === ',' || lastChar === ';') { // remove last ',' or ';'
+                element = element.substring(0, element.length - 1);
+            }
 
             // find variable declaration type
             if (element.search(regexVariableTypeStart) !== -1) {
