@@ -2,6 +2,7 @@
 SystemVerilog support based on [https://github.com/al8/sublimetext-Verilog](https://github.com/al8/sublimetext-Verilog) SumblieText package.
 
 ## Features
+
 ### Done
 - Syntax highlighting for `.sv` `.SV` files
 - Snippets for:
@@ -13,6 +14,9 @@ SystemVerilog support based on [https://github.com/al8/sublimetext-Verilog](http
         - `paramod` for module with parameters
         - `begin` to generate begin and end pair
 - Hover variable declaration ([PR#16](https://github.com/mshr-h/vscode-systemverilog-support/pull/16))
+- Command for module instantiation ([PR#20](https://github.com/mshr-h/vscode-systemverilog-support/pull/20))
+  1. Open command palette `Ctrl+Shift+P` and type `System Verilog: Instantiate Module`
+  1. Choose file you want to instantiate and it will insert inst at cursor location
 
 ### Known bug
 - `begin ... end` bracket matching not supported
