@@ -24,22 +24,18 @@ class SystemVerilogHoverProvider implements vscode.HoverProvider {
     public provideHover(
         document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken):
         vscode.Hover {
-            // text at current line
-            let textLine = document.lineAt(position).text;
-
             // get word start and end
             let textRange = document.getWordRangeAtPosition(position);
 
             // hover word
-            let targetText = textLine.substring(textRange.start.character, textRange.end.character);
+            let targetText = document.getText(textRange);
 
             if (targetText.search(this._excludedText) !== -1) { // systemverilog keywords
                 return;
             } else { // find declaration
                 let declarationText = this._findDeclaration(document, position, targetText);
                 if (declarationText !== undefined) {
-                    let renderedText = '```systemverilog\n' + declarationText + '\n```';
-                    return new vscode.Hover(renderedText);
+                    return new vscode.Hover({language: 'systemverilog', value: declarationText});
                 } else {
                     return;
                 }
