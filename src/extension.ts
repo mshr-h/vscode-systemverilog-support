@@ -44,14 +44,14 @@ class SystemVerilogHoverProvider implements vscode.HoverProvider {
             } else { // find declaration
                 let declarationText = this._findDeclaration(document, position, targetText);
                 if (declarationText !== undefined) {
-                    return new vscode.Hover({language: 'systemverilog', value: declarationText});
+                    return new vscode.Hover([ {language: 'systemverilog', value: declarationText.element}, declarationText.comment ]);
                 } else {
                     return;
                 }
             }
     }
 
-    private _findDeclaration(document: vscode.TextDocument, position: vscode.Position, target: string): string {
+    private _findDeclaration(document: vscode.TextDocument, position: vscode.Position, target: string): {element: string, comment: string} {
         // check target is valid variable name
         if (target.search(/[A-Za-z_][A-Za-z0-9_]*/g) === -1) {
             return;
@@ -69,7 +69,8 @@ class SystemVerilogHoverProvider implements vscode.HoverProvider {
         // from previous line to first line
         for (let i = position.line-1; i >= 0; i--) {
             // text at current line
-            let element = document.lineAt(i).text.replace(/\/\/.*/, '').trim().replace(/\s+/g, ' ');
+            let line = document.lineAt(i).text;
+            let element = line.replace(/\/\/.*/, '').trim().replace(/\s+/g, ' ');
             let lastChar = element.charAt(element.length - 1);
             if (lastChar === ',' || lastChar === ';') { // remove last ',' or ';'
                 element = element.substring(0, element.length - 1);
@@ -83,16 +84,51 @@ class SystemVerilogHoverProvider implements vscode.HoverProvider {
                 // replace array to '', like [7:0]
                 subText = subText.replace(/(\[.+?\])?/g, '').trim();
                 if (subText.search(regexTarget) !== -1) {
-                    return element;
+                    let comment = getPrefixedComment(document, i);
+                    if (comment)
+                        return { element: element, comment: comment };
+                    else {
+                        comment = getSuffixedComment(document, i);
+                        return { element: element, comment: comment };
+                    }
                 }
             }
 
             // find parameter declaration type
             if (element.search(regexParaType) !== -1) {
-                return element;
+                let comment = getPrefixedComment(document, i);
+                if(comment)
+                    return { element: element, comment: comment };
+                else{
+                    comment = getSuffixedComment(document, i);
+                    return { element: element, comment: comment };
+                }
             }
         }
     }
+}
+
+function getPrefixedComment(document: vscode.TextDocument, lineNo: number) {
+    let i = lineNo - 1;
+    let buf = '';
+    while (true) {
+        let line = document.lineAt(i).text.trim();
+        if (!line.startsWith('//'))
+            break;
+        buf = line.substring(3) + '\n' + buf;
+        i--;
+    }
+    return buf;
+}
+
+function getSuffixedComment(document: vscode.TextDocument, lineNo: number) : string {
+    // Spearate comment after the declaration
+    let line = document.lineAt(lineNo).text;
+    let idx = line.indexOf("//");
+    if(idx !== -1)
+        return line.substr(idx + 2).trim();
+    else
+        return undefined;
 }
 
 function getDirectories (srcpath: string): string[] {
