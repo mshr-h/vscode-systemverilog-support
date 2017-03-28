@@ -47,3 +47,7 @@ README.md                     readme
 
 ## See also
 [https://marketplace.visualstudio.com/items/mshr-h.SystemVerilog](https://marketplace.visualstudio.com/items/mshr-h.SystemVerilog)
+
+## License
+
+[MIT](LICENSE)
