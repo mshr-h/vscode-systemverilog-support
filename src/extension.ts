@@ -84,26 +84,51 @@ class SystemVerilogHoverProvider implements vscode.HoverProvider {
                 // replace array to '', like [7:0]
                 subText = subText.replace(/(\[.+?\])?/g, '').trim();
                 if (subText.search(regexTarget) !== -1) {
-                    // Spearate comment after the declaration
-                    let comment = undefined;
-                    let idx = line.indexOf("//");
-                    if(idx !== -1)
-                        comment = line.substr(idx + 2).trim();
-                    return {element: element, comment: comment};
+                    let comment = getPrefixedComment(document, i);
+                    if (comment)
+                        return { element: element, comment: comment };
+                    else {
+                        comment = getSuffixedComment(document, i);
+                        return { element: element, comment: comment };
+                    }
                 }
             }
 
             // find parameter declaration type
             if (element.search(regexParaType) !== -1) {
-                // Spearate comment after the declaration
-                let comment = undefined;
-                let idx = line.indexOf("//");
-                if(idx !== -1)
-                    comment = line.substr(idx + 2).trim();
-                return { element: element, comment: comment };
+                let comment = getPrefixedComment(document, i);
+                if(comment)
+                    return { element: element, comment: comment };
+                else{
+                    comment = getSuffixedComment(document, i);
+                    return { element: element, comment: comment };
+                }
             }
         }
     }
+}
+
+function getPrefixedComment(document: vscode.TextDocument, lineNo: number) {
+    let i = lineNo - 1;
+    let buf = '';
+    while (true) {
+        let line = document.lineAt(i).text.trim();
+        if (!line.startsWith('//'))
+            break;
+        buf = line.substring(3) + '\n' + buf;
+        i--;
+    }
+    return buf;
+}
+
+function getSuffixedComment(document: vscode.TextDocument, lineNo: number) : string {
+    // Spearate comment after the declaration
+    let line = document.lineAt(lineNo).text;
+    let idx = line.indexOf("//");
+    if(idx !== -1)
+        return line.substr(idx + 2).trim();
+    else
+        return undefined;
 }
 
 function getDirectories (srcpath: string): string[] {
