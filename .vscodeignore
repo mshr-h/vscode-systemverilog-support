@@ -1,9 +1,10 @@
 .vscode/**
-test/**
 .gitignore
-tsconfig.json
 *.vsix
+test/**
+tsconfig.json
 build.sh
+.travis.yml
 testfile.*
 
 .vscode-test/**
