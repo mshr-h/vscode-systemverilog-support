@@ -24,6 +24,20 @@ SystemVerilog support based on [https://github.com/al8/sublimetext-Verilog](http
 ## GitHub repos
 [mshr-h/vscode-systemverilog-support](https://github.com/mshr-h/vscode-systemverilog-support)
 
+## Repository organization
+
+This repository is organized as follows:
+
+```
+sytnaxes/                     syntax definition
+snippets/                     code snippet
+src/                          source code for custom feature
+language-configuration.json   language configuration
+package.json                  package configuration
+LICENSE.txt                   license
+README.md                     readme
+```
+
 ## Contributing
 1. Fork it ( [https://github.com/mshr-h/vscode-systemverilog-support](https://github.com/mshr-h/vscode-systemverilog-support) )
 2. Create your feature branch (`git checkout -b my-new-feature`)
