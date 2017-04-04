@@ -226,22 +226,29 @@ function instantiateModule(srcpath: string) {
     if (portsName.length === 0) {
         return;
     }
-    let inst = moduleName + '\n';
+
+    let prefix =
+        vscode.workspace
+        .getConfiguration("systemverilog")['instancePrefix'];
+
+    let paramString = ``
     if (parametersName.length > 0) {
-        inst += '#(\n';
-        inst += instantiatePort(parametersName);
-        inst += ')\n';
+        paramString = `\n#(\n${instantiatePort(parametersName)})\n`
     }
-    inst += `u_${moduleName}(\n`;
-    inst += instantiatePort(portsName);
-    inst += ');\n';
-    return inst;
+
+    return new vscode.SnippetString()
+        .appendText(moduleName + " ")
+        .appendText(paramString)
+        .appendPlaceholder(prefix)
+        .appendPlaceholder(`${moduleName}(\n`)
+        .appendText(instantiatePort(portsName))
+        .appendText(');\n');
 }
 
 function instantiateModuleInteract() {
     let filePath = path.dirname(vscode.window.activeTextEditor.document.fileName);
     selectFile(filePath).then(srcpath => {
         let inst = instantiateModule(srcpath);
-        vscode.window.activeTextEditor.insertSnippet(new vscode.SnippetString(inst));
+        vscode.window.activeTextEditor.insertSnippet(inst);
     });
 }

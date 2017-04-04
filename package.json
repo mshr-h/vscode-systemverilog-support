@@ -29,6 +29,16 @@
 			"language": "systemverilog",
 			"path": "./snippets/snippets.json"
 		}],
+		"configuration": {
+			"title": "",
+			"properties": {
+				"systemverilog.instancePrefix" :{
+					"type":"string",
+					"default": "u_",
+					"description": "The prefix to use when instantiating a new module"
+				}
+			}
+		},
 		"commands": [{
 			"command": "extension.systemverilog.instantiateModule",
 			"title": "System Verilog: Instantiate Module"
