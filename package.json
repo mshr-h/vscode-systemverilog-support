@@ -1,7 +1,7 @@
 {
 	"name": "SystemVerilog",
 	"description": "System Verilog support for VS Code",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"publisher": "mshr-h",
 	"repository": {
 		"type": "git",
