@@ -3,4 +3,3 @@ always_ff @( clock ) begin : blockName
         
     endcase
 end
-
