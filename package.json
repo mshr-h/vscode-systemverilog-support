@@ -14,35 +14,66 @@
 		"Languages"
 	],
 	"contributes": {
-		"languages": [{
-			"id": "systemverilog",
-			"aliases": ["System Verilog", "systemverilog"],
-			"extensions": [".sv",".SV"],
-			"configuration": "./language-configuration.json"
-		}],
-		"grammars": [{
-			"language": "systemverilog",
-			"scopeName": "source.systemverilog",
-			"path": "./syntaxes/systemverilog.tmLanguage"
-		}],
-		"snippets": [{
-			"language": "systemverilog",
-			"path": "./snippets/snippets.json"
-		}],
+		"languages": [
+			{
+				"id": "systemverilog",
+				"aliases": [
+					"System Verilog",
+					"systemverilog"
+				],
+				"extensions": [
+					".sv",
+					".SV"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "systemverilog",
+				"scopeName": "source.systemverilog",
+				"path": "./syntaxes/systemverilog.tmLanguage"
+			}
+		],
+		"snippets": [
+			{
+				"language": "systemverilog",
+				"path": "./snippets/snippets.json"
+			}
+		],
 		"configuration": {
 			"title": "",
 			"properties": {
-				"systemverilog.instancePrefix" :{
-					"type":"string",
+				"systemverilog.instancePrefix": {
+					"type": "string",
 					"default": "u_",
 					"description": "The prefix to use when instantiating a new module"
 				}
 			}
 		},
-		"commands": [{
-			"command": "extension.systemverilog.instantiateModule",
-			"title": "System Verilog: Instantiate Module"
-		}]
+		"commands": [
+			{
+				"command": "extension.systemverilog.instantiateModule",
+				"title": "System Verilog: Instantiate Module"
+			},
+			{
+				"command": "extension.systemverilog.alignment",
+				"title": "System Verilog: alignment"
+			}
+		],
+		"menus": {
+			"editor/context": [{
+        "command": "extension.systemverilog.alignment",
+				"when": "editorHasSelection",
+				"group": "1_modification"
+    	}]
+		},
+		"keybindings": [{
+			"command": "extension.systemverilog.alignment",
+			"key": "alt+=",
+			"mac": "alt+=",
+			"when": "editorHasSelection"
+	}]
 	},
 	"activationEvents": [
 		"onLanguage:systemverilog"
