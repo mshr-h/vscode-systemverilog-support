@@ -48,6 +48,16 @@
 					"type": "string",
 					"default": "u_",
 					"description": "The prefix to use when instantiating a new module"
+				},
+				"systemverilog.condenseBlankLines": {
+					"type":"boolean",
+					"default": false,
+					"description": "When aligning code leave blank lines between lines"
+				},
+				"systemverilog.alignEndOfLine": {
+					"type": "boolean",
+					"default": false,
+					"description": "Align the comma at the end of the port definition"
 				}
 			}
 		},
