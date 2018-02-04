@@ -20,7 +20,9 @@ function instantiateModule(srcpath: string) {
       return;
   }
   // module 2001 style
-  let moduleIO = content.substring(content.indexOf('module'), content.indexOf(';'));
+  let moduleStart = content.indexOf('module');
+  let moduleEnd   = content.indexOf(';', moduleStart);
+  let moduleIO = content.substring(moduleStart, moduleEnd);
   let moduleName = moduleIO.match(/module\s+\b([A-Za-z_][A-Za-z0-9_]*)\b/)[1];
   let parametersName = [];
   let portsName = [];
