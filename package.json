@@ -1,5 +1,6 @@
 {
 	"name": "systemverilog",
+	"displayName": "SystemVerilog",
 	"description": "System Verilog support for VS Code",
 	"version": "0.0.17",
 	"publisher": "mshr-h",
