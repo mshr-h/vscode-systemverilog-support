@@ -207,7 +207,7 @@ PUBLIC '-//Apple//DTD PLIST 1.0//EN'
       </dict>
       <dict>
         <key>match</key>
-        <string>(\b\d+)?'[sS]?([bB]\s*[0-1_xXzZ?]+|[oO]\s*[0-7_xXzZ?]+|[dD]\s*[0-9_xXzZ?]+|[hH]\s*[0-9a-fA-F_xXzZ?]+|[0-1xz])((e|E)(\+|-)?[0-9]+)?\b</string>
+        <string>(\b\d+)?'[sS]?([bB]\s*[0-1_xXzZ?]+|[oO]\s*[0-7_xXzZ?]+|[dD]\s*[0-9_xXzZ?]+|[hH]\s*[0-9a-fA-F_xXzZ?]+|[0-1xXzZ])((e|E)(\+|-)?[0-9]+)?(?!(\w|\?))</string>
         <key>name</key>
         <string>constant.numeric.systemverilog</string>
       </dict>
