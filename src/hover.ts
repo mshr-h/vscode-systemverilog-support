@@ -19,7 +19,7 @@ export class SystemVerilogHoverProvider implements vscode.HoverProvider {
               if (targetText.search(this._excludedText) !== -1) { // systemverilog keywords
                   return;
               } else { // find declaration
-                  let declarationText = this._findDeclaration(document, position, targetText);
+                  let declarationText = this._findDeclaration(document, textRange, targetText);
                   if (declarationText !== undefined) {
                       return new vscode.Hover([ {language: 'systemverilog', value: declarationText.element}, declarationText.comment ]);
                   } else {
@@ -27,13 +27,33 @@ export class SystemVerilogHoverProvider implements vscode.HoverProvider {
                   }
               }
       }
-  
-      private _findDeclaration(document: vscode.TextDocument, position: vscode.Position, target: string): {element: string, comment: string} {
+
+      private _findDeclaration(document: vscode.TextDocument, range: vscode.Range, target: string): {element: string, comment: string} {
           // check target is valid variable name
           if (target.search(/[A-Za-z_][A-Za-z0-9_]*/g) === -1) {
               return;
           }
-  
+
+          let position = range.start;
+
+          // Check if the variable is a macro invocation (starts with `)
+          let previousCharacter = document.getText(
+                  new vscode.Range(
+                      position.with(position.line, position.character-1),
+                      position));
+          if (previousCharacter === "`") {
+              for (let i = position.line-1; i >= 0; i--) {
+                  // text at current line
+                  let line = document.lineAt(i).text;
+                  let pos = line.search(RegExp("`define.*" + target));
+                  if (pos !== -1) {
+                      let comment = getComment(document, i);
+                      return { element: line, comment: comment };
+                  }
+              }
+              return; // Couldn't find a macro definition in this file
+          }
+
           let variableType = String.raw`\b(input|output|inout|reg|wire|logic|integer|bit|byte|shortint|int|longint|time|shortreal|real|double|realtime|rand|randc)\b\s+`;
           let variableTypeStart = '^' + variableType;
           let paraType = String.raw`^\b(parameter|localparam)\b\s+\b${target}\b`;
@@ -61,32 +81,34 @@ export class SystemVerilogHoverProvider implements vscode.HoverProvider {
                   // replace array to '', like [7:0]
                   subText = subText.replace(/(\[.+?\])?/g, '').trim();
                   if (subText.search(regexTarget) !== -1) {
-                      let comment = getPrefixedComment(document, i);
-                      if (comment)
-                          return { element: element, comment: comment };
-                      else {
-                          comment = getSuffixedComment(document, i);
-                          return { element: element, comment: comment };
-                      }
+                    let comment = getComment(document, i);
+                    return { element: element, comment: comment };
                   }
               }
   
               // find parameter declaration type
               if (element.search(regexParaType) !== -1) {
-                  let comment = getPrefixedComment(document, i);
-                  if(comment)
-                      return { element: element, comment: comment };
-                  else{
-                      comment = getSuffixedComment(document, i);
-                      return { element: element, comment: comment };
-                  }
+                let comment = getComment(document, i);
+                return { element: element, comment: comment };
               }
           }
       }
   }
-  
+
+  function getComment(document: vscode.TextDocument, lineNo: number) {
+    let comment = getPrefixedComment(document, lineNo);
+    if(comment)
+      return comment;
+    else {
+      return getSuffixedComment(document, lineNo);
+    }
+  }
+
   function getPrefixedComment(document: vscode.TextDocument, lineNo: number) {
-      let i = lineNo - 1;
+	if (lineNo == 0) {
+		return undefined;
+	}
+	let i = lineNo - 1;
       let buf = '';
       while (true) {
           let line = document.lineAt(i).text.trim();
